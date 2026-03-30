@@ -8,6 +8,10 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
   
+  if (pathname.startsWith('/handler')) {
+    return NextResponse.next();
+  }
+  
   if (pathname.startsWith('/app/')) {
     return NextResponse.redirect(new URL('/cadastro', request.url));
   }
