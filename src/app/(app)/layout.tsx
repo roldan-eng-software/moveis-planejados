@@ -10,11 +10,7 @@ import { Suspense } from "react";
 const navItems = [
   { label: "Dashboard", href: "/app/dashboard" },
   { label: "Orçamentos", href: "/app/orcamentos" },
-  { label: "Produção", href: "/app/producao" },
   { label: "Clientes", href: "/app/clientes" },
-  { label: "Financeiro", href: "/app/financeiro" },
-  { label: "Contratos", href: "/app/contratos" },
-  { label: "Estoque", href: "/app/estoque" },
 ];
 
 export default function AppLayout({ children }: { children: ReactNode }) {

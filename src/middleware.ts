@@ -1,8 +1,8 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
-const protectedRoutes = ['/app'];
-const publicRoutes = ['/', '/cadastro', '/handler', '/api/auth', '/_next', '/favicon.ico', '/api/test-setup'];
+const protectedRoutes = ['/app/dashboard', '/app/clientes', '/app/orcamentos'];
+const publicRoutes = ['/', '/login', '/cadastro', '/handler', '/api/auth', '/_next', '/favicon.ico', '/api/test-setup'];
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
@@ -15,7 +15,7 @@ export async function middleware(request: NextRequest) {
   
   if (protectedRoutes.some(route => pathname.startsWith(route))) {
     if (!stackToken) {
-      return NextResponse.redirect(new URL('/cadastro', request.url));
+      return NextResponse.redirect(new URL('/login', request.url));
     }
   }
   

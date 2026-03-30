@@ -1,9 +1,20 @@
 "use client";
 
-import { CredentialSignIn } from "@stackframe/stack";
+import { CredentialSignIn, useUser } from "@stackframe/stack";
 import Link from "next/link";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
+  const user = useUser();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (user) {
+      router.push("/app/dashboard");
+    }
+  }, [user, router]);
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-primary-light to-white p-4">
       <div className="w-full max-w-md">
