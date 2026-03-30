@@ -1,19 +1,22 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
-export function middleware(request: NextRequest) {
+const protectedRoutes = ['/app'];
+const publicRoutes = ['/', '/cadastro', '/handler', '/api/auth', '/_next', '/favicon.ico', '/api/test-setup'];
+
+export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   
-  if (pathname.startsWith('/api/test-setup')) {
+  if (publicRoutes.some(route => pathname.startsWith(route))) {
     return NextResponse.next();
   }
   
-  if (pathname.startsWith('/handler')) {
-    return NextResponse.next();
-  }
+  const stackToken = request.cookies.get('stack-session-token');
   
-  if (pathname.startsWith('/app/')) {
-    return NextResponse.redirect(new URL('/cadastro', request.url));
+  if (protectedRoutes.some(route => pathname.startsWith(route))) {
+    if (!stackToken) {
+      return NextResponse.redirect(new URL('/cadastro', request.url));
+    }
   }
   
   return NextResponse.next();
