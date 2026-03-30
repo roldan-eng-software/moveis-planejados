@@ -8,7 +8,7 @@ export default function Home() {
       <nav className="bg-white border-b border-stone-200 px-6 py-4">
         <div className="max-w-6xl mx-auto flex items-center justify-between">
           <div className="text-xl font-bold text-primary">Móveis Planejados</div>
-          <Link href="/cadastro">
+          <Link href="/login">
             <Button variant="outline">Entrar</Button>
           </Link>
         </div>
@@ -27,7 +27,7 @@ export default function Home() {
             <Link href="/cadastro">
               <Button className="bg-primary hover:bg-primary-hover">Começar Agora</Button>
             </Link>
-            <Link href="/cadastro">
+            <Link href="/login">
               <Button variant="outline">Fazer Login</Button>
             </Link>
           </div>
