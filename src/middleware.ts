@@ -1,32 +1,14 @@
-import { NextResponse } from 'next/server';
-import type { NextRequest } from 'next/server';
-import { stackServerApp } from './lib/stack';
+import { createMiddleware } from "@stackframe/stack";
+import { stackServerApp } from "./lib/stack";
 
-const PUBLIC_PATHS = ['/', '/cadastro', '/handler', '/_next', '/favicon.ico'];
-
-export async function middleware(request: NextRequest) {
-  const { pathname } = request.nextUrl;
-  
-  if (PUBLIC_PATHS.some(path => pathname === path || pathname.startsWith(path) && path !== '/')) {
-    if (pathname === '/' || pathname === '/cadastro' || pathname.startsWith('/handler')) {
-      const user = await stackServerApp.getUser({ or: null });
-      
-      if (user && pathname !== '/handler') {
-        return NextResponse.redirect(new URL('/app/dashboard', request.url));
-      }
-    }
-    return NextResponse.next();
-  }
-  
-  const user = await stackServerApp.getUser({ or: null });
-  
-  if (!user && pathname.startsWith('/app')) {
-    return NextResponse.redirect(new URL('/cadastro', request.url));
-  }
-  
-  return NextResponse.next();
-}
+export default createMiddleware({
+  publishableKey: process.env.NEXT_PUBLIC_STACK_PUBLISHABLE_CLIENT_KEY!,
+  secretKey: process.env.STACK_SECRET_SERVER_KEY!,
+  autoSignIn: false,
+});
 
 export const config = {
-  matcher: ['/((?!_next/static|_next/image|favicon.ico).*)'],
+  matcher: [
+    '/app/:path*',
+  ],
 };
