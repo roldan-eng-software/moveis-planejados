@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { DM_Sans, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
-import { Providers } from "@/components/Providers";
 
 const dmSans = DM_Sans({
   variable: "--font-display",
@@ -33,9 +32,7 @@ export default function RootLayout({
   return (
     <html lang="pt-BR" className="h-full">
       <body className={`${dmSans.variable} ${inter.variable} ${jetbrainsMono.variable} min-h-full antialiased font-body`}>
-        <Providers>
-          {children}
-        </Providers>
+        {children}
       </body>
     </html>
   );
