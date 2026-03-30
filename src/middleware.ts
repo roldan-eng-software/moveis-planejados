@@ -1,5 +1,4 @@
 import { createMiddleware } from "@stackframe/stack";
-import { stackServerApp } from "./lib/stack";
 
 export default createMiddleware({
   publishableKey: process.env.NEXT_PUBLIC_STACK_PUBLISHABLE_CLIENT_KEY!,
@@ -10,5 +9,6 @@ export default createMiddleware({
 export const config = {
   matcher: [
     '/app/:path*',
+    '/api/test-setup/:path*',
   ],
 };
