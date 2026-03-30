@@ -1,3 +1,3 @@
-import { StackHandlerPage } from "@stackframe/stack";
+import { StackHandler } from "@stackframe/stack";
 
-export default StackHandlerPage;
+export default StackHandler;
